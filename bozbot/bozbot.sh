@@ -1,9 +1,16 @@
 # Script to check if mongod is up as a proxy of if a harvest is in progress.
 
 # post if user ctrl-c
-trap ctrl_c INT
-function ctrl_c() {
-    curl -X POST -H 'Content-type: applicati/json' --data '{"text":"IEUVM: BozBot down, user interrupt."}' https://YOUR_SLACK_WEBHOOK
+trap interrupt 1 3 6 15
+function interrupt() {
+    curl -X POST -H 'Content-type: applicati/json' --data '{"text":"IEUVM: BozBot down, SIGINT interrupt."}' https://YOUR_SLACK_WEBHOOK
+    exit 0;
+}
+
+# post if interrupted in background
+trap ctrl-c SIGINT
+function ctrl-c() {
+    curl -X POST -H 'Content-type: applicati/json' --data '{"text":"IEUVM: BozBot down, ctrl-c interrupt."}' https://YOUR_SLACK_WEBHOOK
     exit 0;
 }
 
