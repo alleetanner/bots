@@ -7,7 +7,7 @@ function interrupt() {
     exit 0;
 }
 
-# post if by ctrl-c
+# post if interrupted by ctrl-c
 trap ctrl-c SIGINT
 function ctrl-c() {
     curl -s -X POST -H 'Content-type: applicati/json' --data '{"text":"IEUVM: BozBot down, ctrl-c interrupt."}' https://YOUR_SLACK_WEBHOOK
