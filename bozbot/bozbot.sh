@@ -3,7 +3,7 @@
 # post if interrupted in background
 trap interrupt 1 3 6 15
 function interrupt() {
-    curl -s -X POST -H 'Content-type: applicati/json' --data '{"text":"IEUVM: BozBot down, SIGINT interrupt."}' https://YOUR_SLACK_WEBHOOK
+    curl -s -X POST -H 'Content-type: applicati/json' --data '{"text":"IEUVM: BozBot down, interrupted."}' https://YOUR_SLACK_WEBHOOK
     exit 0;
 }
 
